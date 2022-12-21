@@ -67,7 +67,7 @@ self.addEventListener('message', async (event) => {
 		chrome.notifications.create('NOTFICATION_IDS', {
 			type: 'basic',
 			iconUrl: 'camera.png',
-			title: 'ATG MEET',
+			title: 'Screen Recorder',
 			message: 'Would you like to continue recording ?',
 			priority: 2,
 			buttons: [
@@ -250,7 +250,7 @@ function tabListener() {
 						chrome.notifications.create('NOTFICATION_IDS', {
 							type: 'basic',
 							iconUrl: 'camera.png',
-							title: 'ATG MEET',
+							title: 'Screen Recorder',
 							message: 'Would you like to continue recording ?',
 							priority: 2,
 							buttons: [

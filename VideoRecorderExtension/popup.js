@@ -55,7 +55,7 @@ async function postData(url = '', data = {}) {
 	return response.json(); // parses JSON response into native JavaScript objects
 }
 
-postData('https://meet.atg.party/userDetails')
+postData('http://localhost:3000/userDetails')
 	.then((data) => {
 		console.log(data);
 		user = data
@@ -72,7 +72,7 @@ navigator.serviceWorker.controller.postMessage({
 });
 
 window.addEventListener('load', () => {
-	const request = window.indexedDB.open("ATG-MEET-RECORDINGS", 3);
+	const request = window.indexedDB.open("SCREEN-RECORDINGS", 3);
 	request.onupgradeneeded = (event) => {
 		db = event.target.result;
 
@@ -95,10 +95,10 @@ window.addEventListener('load', () => {
 		listLastRecordedVideos();
 	};
 	signUpBtn.addEventListener('click', () => {
-		chrome.tabs.create({ url: "https://meet.atg.party/login" });
+		chrome.tabs.create({ url: "http://localhost:3000/login" });
 	})
 	homeBtn.addEventListener('click', () => {
-		chrome.tabs.create({ url: "https://meet.atg.party/home" });
+		chrome.tabs.create({ url: "http://localhost:3000/home" });
 	})
 	startButton.addEventListener('click', () => {
 		linkDiv.hidden = true;
@@ -396,7 +396,7 @@ function uploadToAws(recordedVideo, key) {
 	isUploading = true;
 	checkConnection()
 	let request = new XMLHttpRequest();
-	request.open('POST', 'https://meet.atg.party/uploadVideo');
+	request.open('POST', 'http://localhost:3000/uploadVideo');
 	//request.setRequestHeader("auth", cookieValue);
 	//request.setRequestHeader('Content-Type', 'multipart/form-data');
 
@@ -697,7 +697,7 @@ chrome.tabs.onUpdated.addListener(updateTabs);
 
 document.getElementById('copyButton').addEventListener('click', () => {
 	var copyText = document.getElementById("link");
-	navigator.clipboard.writeText('https://' + copyText.innerText);
+	navigator.clipboard.writeText('http://' + copyText.innerText);
 	document.getElementById('linkCopiedText').hidden = false;
 	setTimeout(() => {
 		document.getElementById('linkCopiedText').hidden = true;

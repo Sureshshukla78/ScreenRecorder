@@ -65,7 +65,7 @@ module.exports.uploadVideo = async (req, res) => {
       .toLocaleDateString('en-US', { timeZone: 'Asia/Kolkata' })
       .toLowerCase().split('/')
     let date = `${dateNow[1]} ${months[dateNow[0] - 1]} ${dateNow[2]}`;
-    let fName = `${time} - ${date} - ATG RECORDER`;
+    let fName = `${time} - ${date} - RECORDER`;
     let file = req.files.video;
     if (req.files.meetName) {
       if (req.files.meetName.name !== 'null')
@@ -116,7 +116,7 @@ module.exports.uploadVideo = async (req, res) => {
         await videoLink.save();
 
         const details = {
-          watchableLink: `meet.atg.party/${videoLink.id}/watch`,
+          watchableLink: `localhost:3000/${videoLink.id}/watch`,
           downloadableLink: data.Location,
           title: fName,
         };

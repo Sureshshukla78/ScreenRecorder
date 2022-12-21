@@ -17,7 +17,7 @@ setInterval(() => {
 	chrome.runtime.sendMessage({ greeting: "wake" }, function (response) {
 	})
 }, 1000)
-if (location.href == 'https://meet.atg.party/home') {
+if (location.href == 'http://localhost:3000/home') {
 	async function postData(url = '', data = {}) {
 		// Default options are marked with *
 		//console.log("get data");
@@ -33,7 +33,7 @@ if (location.href == 'https://meet.atg.party/home') {
 		return response.json(); // parses JSON response into native JavaScript objects
 	}
 
-	postData('https://meet.atg.party/userDetails')
+	postData('http://localhost:3000/userDetails')
 		.then((data) => {
 			user = data
 			if (data) {
@@ -43,7 +43,7 @@ if (location.href == 'https://meet.atg.party/home') {
 			}
 		});
 }
-if (location.href == "https://meet.atg.party/") {
+if (location.href == "http://localhost:3000/") {
 	console.log("logout");
 	chrome.runtime.sendMessage({ greeting: "logout" }, function (response) {
 		console.log(response);

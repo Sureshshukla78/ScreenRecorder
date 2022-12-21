@@ -1,6 +1,6 @@
 {
     "manifest_version":3,
-    "name":"ATG Recorder",
+    "name":"Screen Recorder",
     "version":"0.3.8.3",
     "permissions":["notifications","tabs","desktopCapture","scripting","storage","unlimitedStorage"],
     "host_permissions": [
