@@ -1,0 +1,273 @@
+<link rel="stylesheet" href="../../css/myVideoPage.css" />
+
+
+<section style="overflow: hidden;">
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div style="margin-bottom: 5px;">
+            <a onclick="moveToFolder(0)" style="text-decoration: none;">
+              <div class="folder" style="display:flex;">
+                <i style="margin-right:5px;color: #64686b" class="fa-solid fa-folder"></i>
+                <h6 style="font-size: small;text-decoration: none;color: black;">
+                  home</h6>
+              </div>
+            </a>
+          </div>
+          <%if(folders.length){%>
+            <div>
+              <%for(folders of folders){%>
+            <div style="margin-bottom: 5px;">
+              <a onclick="moveToFolder('<%-folders.id%>')" style="text-decoration: none;">
+                <div class="folder" style="display:flex;">
+                  <i style=" margin-right:5px;color: #64686b" class="fa-solid fa-folder"></i>
+                  <h6 style="font-size: small;text-decoration: none;color: black;">
+                    <%-folders.folder_name%></h6>
+                </div>
+              </a>
+            </div>
+      
+              <%}}else{%>
+                <%}%>
+              </div>
+              </div>
+      </div>
+  <div class="personalContainer">
+    <div class="heading">
+      <!-- <h2>Kenil Joshi</h2> -->
+      <h1><%=folder.folder_name%></h1>
+
+      </div>
+    </div>
+    </div>
+      <div style="width: 100px;position: relative;left: 49rem;">
+        <div id="myProgress">
+          <div hidden id="myBar"></div>
+        </div>
+      </div>
+      <div class="personalNavLinksAndButtons">
+        <div class="personalNavLinks">
+          <a href="#" class="selectedLink"> Videos </a>
+        </div>
+        <div class="buttonsForAdd">
+          <!-- <button class="folderBtn" hidden>New Folder</button> -->
+          <form action="/<%-folder.id%>/uploadVideo" method="POST" enctype="multipart/form-data" onChange="uploadFile()">
+            <!-- <button class="addBtn"> -->
+            <!-- <i class="fas fa-plus"></i> -->
+            <input type="text" value="<%=folder.id%>" id="folderId" hidden>
+            <input style="margin: 0px -60px 0px 0;padding: 8px 0 0 0;" type="file" name="video" class="custom-file-input-folder" id="file">
+
+            <!-- </button> -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="videoContainer">
+    <div class="videos">
+      <div class="c-video">
+        <%if(uservideos.length){%>
+          <%for(video of uservideos){%>
+            <div class="singleVideo">
+              <video class="video" src="<%=awsLink%><%=video.url%>"></video>
+              <form action="/<%=video.id%>/watch" method="GET">
+                <button class="addBtn">View Video Details</button>
+              </form>
+              <div class="headingAndDetails">
+                <div class="nameVideo">
+                  <a href="#">
+                    <h3>
+                      <%=video.title%>
+                    </h3>
+                  </a>
+                </div>
+                <div class="lockUnlock">
+                  <% if(video.status=="private" ) {%>
+                    <div class="unlock">
+                      <i class="fa-solid fa-user"></i>
+                    </div>
+                    <% }else { %>
+                      <div class=>
+                        <i class="fa-solid fa-users"></i>
+                      </div>
+                      <% } %>
+                </div>
+                <div class="share">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+
+                <div class="shareOptions">
+                  <div class="shareLink">
+                    <i class="fas fa-link"></i>
+
+                    <div style="display: none" id="link1<%=video.id%>">
+                      https://meet.atg.party/<%=video.id%>/watch
+                    </div>
+                    <button onclick="copyToClipboard('link1<%=video.id%>')">
+                      share link
+                    </button>
+
+                  </div>
+                </div>
+                <div class="deleteOption">
+                  <div class="shareLink">
+                    <i class="fa-regular fa-trash-can"></i>
+                    <button onclick="deleteVideo('<%=video.id%>')">
+                      delete
+                    </button>
+
+                  </div>
+                </div>
+                <div class="moveOption">
+                  <div class="shareLink">
+                    <i class="fa-solid fa-arrow-down"></i>
+                    <button onclick="move('<%=video.id%>')">
+                      move to
+                    </button>
+
+                  </div>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+            <%}}else{%>
+            <div style="display: flex;flex-direction: column;">
+              <img style="width: 20rem;
+              position: relative;
+              top: -2px;
+          " class=" img" src="/img/noVideoIcon.png" alt=""><h3 class="text-center">NO VIDEOS </h3>
+              <%}%>
+            </div>
+    </div>
+  </div>
+</section>
+</div>
+</body>
+<script>
+  const videos = document.querySelectorAll(".video");
+  const headingAndDetails = document.querySelectorAll(".headingAndDetails");
+  const shares = document.querySelectorAll(".share");
+  const shareOptions = document.querySelectorAll(".shareOptions");
+  const lockUnlocks = document.querySelectorAll(".lockUnlock");
+  const lock = document.querySelectorAll(".lock");
+  videos.forEach((video, index) => {
+    video.addEventListener("click", () => {
+      headingAndDetails[index].classList.toggle("seen");
+    });
+  });
+  shares.forEach((share, index) => {
+    share.addEventListener("click", () => {
+      shareOptions[index].classList.toggle("seenShareOption");
+      document.getElementsByClassName('deleteOption')[index].classList.toggle("seenShareOption")
+      document.getElementsByClassName('moveOption')[index].classList.toggle("seenShareOption")
+    });
+  });
+  lockUnlocks.forEach((lockUnlock, index) => {
+    lockUnlock.addEventListener("click", () => {
+      lock[index].classList.toggle("lockSeen");
+    });
+  });
+</script>
+<script>
+  function copyToClipboard(elementId) {
+    // Create a "hidden" input
+    var aux = document.createElement("input");
+
+    // Assign it the value of the specified element
+    aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+
+    // Append it to the body
+    document.body.appendChild(aux);
+
+    // Highlight its content
+    aux.select();
+
+    // Copy the highlighted text
+    document.execCommand("copy");
+
+    // Remove it from the body
+    document.body.removeChild(aux);
+    alert("Link Copied To Clipboard");
+
+  }
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+  function deleteVideo(id) {
+    let value = confirm("The video will be permenently deleted");
+    if (value) {
+      window.location.replace(`https://meet.atg.party/${id}/deleteVideo`)
+    }
+  }
+  function uploadFile() {
+    let data = new  FormData();
+    var videofile = document.getElementById('file');
+    let folderId=document.getElementById('folderId').value
+    console.log(folderId);
+    data.append('video', videofile.files[0], `${folderId}.mp4`);
+    console.log(data);
+
+    let request = new XMLHttpRequest();
+    request.open('POST', '/uploadVideo');
+
+    // upload progress event
+    request.upload.addEventListener('progress', function (e) {
+      // upload progress as percentage
+      percent_completed = (e.loaded / e.total) * 100;
+      var elem = document.getElementById("myBar");
+      elem.hidden = false;
+      elem.style.width = percent_completed + '%';
+      // console.log(percent_completed);
+    })
+    // request finished event
+    request.addEventListener('load', function (e) {
+      // console.log(request.status);
+      // console.log(request);
+      var elem = document.getElementById("myBar");
+      elem.hidden = true;
+      var links = JSON.parse(request.response);
+      window.location.replace(`https://${links.watchableLink}`);
+
+    });
+    // send POST request to server
+    request.send(data);
+  }
+  var modal = document.getElementById("myModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+let videoId;
+// When the user clicks the button, open the modal 
+function move (id){
+  modal.style.display = "block";
+  videoId=id;
+}
+function moveToFolder (folderId){
+  console.log(videoId);
+  modal.style.display = "none";
+  console.log(folderId);
+  window.location.replace(`https://meet.atg.party/${videoId}/moveVideo/${folderId}`)
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>

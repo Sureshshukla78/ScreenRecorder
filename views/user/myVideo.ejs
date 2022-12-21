@@ -1,0 +1,369 @@
+<link rel="stylesheet" href="./css/myVideoPage.css" />
+
+
+<section>
+
+  <div class="personalContainer">
+    <div class="heading">
+      <!-- <h2>Kenil Joshi</h2> -->
+      <h1>Personal Library</h1>
+      <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <%if(folder.length){%>
+            <div>
+              <%for(folders of folder){%>
+            <div style="margin-bottom: 5px;width: fit-content;">
+              <a onclick="moveToFolder('<%-folders.id%>')" style="text-decoration: none;">
+                <div class="folder" style="display:flex;">
+                  <i style="margin-right:5px;color: #64686b" class="fa-solid fa-folder"></i>
+                  <h6 style="font-size: small;text-decoration: none;color: black;">
+                    <%-folders.folder_name%></h6>
+                </div>
+              </a>
+            </div>
+      
+              <%}}else{%>
+                <h3 class="text-center" style="left:80%">NO Folders </h3>
+                <%}%>
+              </div>
+              </div>
+      </div>
+    </div>
+    </div>
+    <div class="form-popup" id="renameForm">
+      <form action="/renameFolder" class="form-container" method="post">
+  
+        <label style="display: flex;justify-content:center" for="name"><b>Rename Folder</b></label>
+        <input style="display: flex;" id="renameTextBox" type="text" name="name" required>
+        <input type="text" name="FolderId" id="folderIdTextBox" hidden>
+        
+        <button type="submit" class="btn">Rename folder</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+      </form>
+    </div>
+    <div class="form-popup" id="myForm">
+      <form action="/addFolder" class="form-container" method="post">
+  
+        <label style="display: flex;justify-content:center" for="name"><b>Folder name</b></label>
+        <input style="display:flex;" type="text" placeholder="Enter Folder name" name="name" required>
+        
+        <button type="submit" class="btn">Add folder</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+      </form>
+    </div>
+    <%if(folder.length){%>
+            <div class="personalNavLinksAndButtons">
+        <div class="personalNavLinks">
+          <a href="#" class="selectedLink"> Folders </a>
+        </div>
+        <div class="buttonsForAdd">
+          <button class="open-button" onclick="openForm()">Add folder</button>
+        </div>
+      </div>
+      <div class="alignFolder">
+        <%for(folder of folder){%>
+      <div class="folder" style="margin-bottom: 10px; display: flex; justify-content: space-between;">
+        <a href="/<%-folder.id%>/folder" style="text-decoration: none;">
+          <div  style="display:flex; align-items: center;">
+            <i style="margin-right:10px;margin-left: 5px; color: #64686b" class="fa-solid fa-folder"></i>
+            <h6 style="font-size: 1.1rem;text-decoration: none;color: black;">
+              <%-folder.folder_name%></h6>
+          </div>
+        </a>
+        <div class="dropdown">
+          <button onclick="myFunction('<%-folder.id%>')" class="dropbtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+          <div hidden id="myDropdown<%-folder.id%>" class="dropdown-content">
+            <div class="dropDownDiv" style="display: flex;padding: 6px 0px 6px 3px;">
+              <i style="color:black;font-size: 1.2rem; margin-right: 10px;margin-left: 10px;" class="fa-solid fa-pencil"></i>
+              <a onclick="renameForm('<%-folder.id%>','<%-folder.folder_name%>')" style="font-size: smaller;" href="#home">Rename</a>
+            </div>
+            <div class="dropDownDiv" style="display: flex;padding: 6px 0px 6px 3px;">
+              <i style="color:black;font-size:1.2rem;margin-right: 10px;margin-left: 10px;" class="fa-regular fa-trash-can"></i> 
+              <a style="font-size: smaller;" href="/<%-folder.id%>/deleteFolder">Delete</a>
+            </div>
+            </div>
+        </div>
+      </div>
+
+        <%}}else{%>
+          <%}%>
+        </div>
+      <div style="width: 100px;position: relative;left: 49rem;">
+        <div id="myProgress">
+          <div hidden id="myBar"></div>
+        </div>
+      </div>
+      <div class="personalNavLinksAndButtons">
+        <div class="personalNavLinks">
+          <a href="#" class="selectedLink"> Videos </a>
+        </div>
+          <!-- <button class="folderBtn" hidden>New Folder</button> -->
+          <%if(folder.length==0){%>
+        <div style="
+        display: flex;
+        width: 23rem;
+        height: 33px;
+    " class="buttonsForAdd">
+          <button style='position: relative;
+          top: 5px;' class="open-button" onclick="openForm()">Add folder</button>
+           <form action="/uploadVideo" method="POST" enctype="multipart/form-data" onChange="uploadFile()">
+            <!-- <button class="addBtn"> -->
+            <!-- <i class="fas fa-plus"></i> -->
+            <input type="file" name="video" class="custom-file-input" id="file">
+
+            <!-- </button> -->
+          </form>
+          <%}else{%>
+            <div class="buttonsForAdd alignment">
+            
+          <form action="/uploadVideo" method="POST" enctype="multipart/form-data" onChange="uploadFile()">
+            <!-- <button class="addBtn"> -->
+            <!-- <i class="fas fa-plus"></i> -->
+              <input  type="file" name="video" class="custom-file-input" id="file">
+
+            <!-- </button> -->
+          </form>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="videoContainer">
+    <div class="videos">
+      <div class="c-video">
+        <%if(videos.length){%>
+          <%for(video of videos){%>
+            <div class="singleVideo">
+              <video class="video" src="<%=awsLink%><%=video.url%>"></video>
+              <form action="/<%=video.id%>/watch/<%=video.urlname%>" method="GET">
+                <button class="addBtn">View Video Details</button>
+              </form>
+              <div class="headingAndDetails">
+                <div class="nameVideo">
+                  <a href="#">
+                    <h3>
+                      <%=video.title%>
+                    </h3>
+                  </a>
+                </div>
+                <div class="lockUnlock">
+                  <% if(video.status=="private" ) {%>
+                    <div class="unlock">
+                      <i class="fa-solid fa-user"></i>
+                    </div>
+                    <% }else { %>
+                      <div class=>
+                        <i class="fa-solid fa-users"></i>
+                      </div>
+                      <% } %>
+                </div>
+                <div class="share">
+                  <i style="margin-left: 5px;" class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+
+                <div class="shareOptions">
+                  <div class="shareLink">
+                    <i class="fas fa-link"></i>
+
+                    <div style="display: none" id="link1<%=video.id%>">
+                      https://meet.atg.party/<%=video.id%>/watch/<%=video.urlname%>
+                    </div>
+                    <button onclick="copyToClipboard('link1<%=video.id%>')">
+                      share link
+                    </button>
+
+                  </div>
+                </div>
+                <div class="deleteOption">
+                  <div class="shareLink">
+                    <i class="fa-regular fa-trash-can"></i>
+                    <button onclick="deleteVideo('<%=video.id%>')">
+                      delete
+                    </button>
+
+                  </div>
+                </div>
+                <div class="moveOption">
+                  <div class="shareLink">
+                    <i class="fa-solid fa-arrow-down"></i>
+                    <button onclick="move('<%=video.id%>')">
+                      move to
+                    </button>
+
+                  </div>
+                </div>
+                </form>
+              </div>
+            </div>
+            <%}}else{%>
+              <h3 class="text-center" style="left:80%">NO VIDEOS </h3>
+              <%}%>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+</body>
+<script>
+  function move(id){
+
+  }
+  const videos = document.querySelectorAll(".video");
+  const headingAndDetails = document.querySelectorAll(".headingAndDetails");
+  const shares = document.querySelectorAll(".share");
+  const shareOptions = document.querySelectorAll(".shareOptions");
+  const lockUnlocks = document.querySelectorAll(".lockUnlock");
+  const lock = document.querySelectorAll(".lock");
+  videos.forEach((video, index) => {
+    video.addEventListener("click", () => {
+      headingAndDetails[index].classList.toggle("seen");
+    });
+  });
+  shares.forEach((share, index) => {
+    share.addEventListener("click", () => {
+      shareOptions[index].classList.toggle("seenShareOption");
+      document.getElementsByClassName('deleteOption')[index].classList.toggle("seenShareOption")
+      document.getElementsByClassName('moveOption')[index].classList.toggle("seenShareOption")
+    });
+  });
+  lockUnlocks.forEach((lockUnlock, index) => {
+    lockUnlock.addEventListener("click", () => {
+      lock[index].classList.toggle("lockSeen");
+    });
+  });
+</script>
+<script>
+  function copyToClipboard(elementId) {
+    // Create a "hidden" input
+    var aux = document.createElement("input");
+
+    // Assign it the value of the specified element
+    aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+
+    // Append it to the body
+    document.body.appendChild(aux);
+
+    // Highlight its content
+    aux.select();
+
+    // Copy the highlighted text
+    document.execCommand("copy");
+
+    // Remove it from the body
+    document.body.removeChild(aux);
+    alert("Link Copied To Clipboard");
+
+  }
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    function renameForm(folderId,folderName) {
+  document.getElementById("renameForm").style.display = "block";
+  console.log(folderName);
+  document.getElementById("renameTextBox").value=folderName;
+  document.getElementById("folderIdTextBox").value=folderId;
+  document.getElementById(`myDropdown${folderId}`).hidden=true
+}
+  function openForm() {
+  document.getElementById("renameForm").style.display = "none";
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("renameForm").style.display = "none";
+  document.getElementById("myForm").style.display = "none";
+}
+  function deleteVideo(id) {
+    let value = confirm("The video will be permenently deleted");
+    if (value) {
+      window.location.replace(`https://meet.atg.party/${id}/deleteVideo`)
+    }
+  }
+  function uploadFile() {
+    let data = new FormData();
+    var videofile = document.getElementById('file');
+    console.log(videofile);
+    data.append('video', videofile.files[0], "video.mp4");
+
+    let request = new XMLHttpRequest();
+    request.open('POST', '/uploadVideo');
+
+    // upload progress event
+    request.upload.addEventListener('progress', function (e) {
+      // upload progress as percentage
+      percent_completed = (e.loaded / e.total) * 100;
+      var elem = document.getElementById("myBar");
+      elem.hidden = false;
+      elem.style.width = percent_completed + '%';
+      // console.log(percent_completed);
+    })
+    // request finished event
+    request.addEventListener('load', function (e) {
+      // console.log(request.status);
+      // console.log(request);
+      var elem = document.getElementById("myBar");
+      elem.hidden = true;
+      var links = JSON.parse(request.response);
+      window.location.replace(`https://${links.watchableLink}`);
+
+    });
+    // send POST request to server
+    request.send(data);
+  }
+  // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+let videoId;
+// When the user clicks the button, open the modal 
+function move (id){
+  modal.style.display = "block";
+  videoId=id;
+}
+function moveToFolder (folderId){
+  console.log(videoId);
+  modal.style.display = "none";
+  console.log(folderId);
+  window.location.replace(`https://meet.atg.party/${videoId}/moveVideo/${folderId}`)
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+function myFunction(folderId) {
+  let hiddenStatus=document.getElementById(`myDropdown${folderId}`).hidden;
+  console.log(hiddenStatus);
+  if(hiddenStatus){
+    document.getElementById(`myDropdown${folderId}`).hidden=false
+  }else
+  document.getElementById(`myDropdown${folderId}`).hidden=true
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
+</html>

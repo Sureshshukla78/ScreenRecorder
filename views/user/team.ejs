@@ -1,0 +1,134 @@
+<link rel="stylesheet" href="./css/myVideoPage.css" />
+
+
+<section style="overflow: hidden;">
+
+  <div class="personalContainer">
+    <div class="heading">
+      <h2></h2>
+      <h1>Team</h1>
+      <div class="personalNavLinksAndButtons">
+        <div class="personalNavLinks">
+          <a href="#" class="selectedLink"> Videos </a>
+        </div>
+        <div class="buttonsForAdd">
+          <!-- <button class="folderBtn">New Folder</button> -->
+          <!-- <button class="addBtn">
+            <i class="fas fa-plus"></i>
+            Add Video
+          </button> -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="videoContainer">
+    <div class="videos">
+      <div class="c-video">
+        <%if(video.length){%> <%for(video of video){%>
+        <div class="singleVideo">
+          <video class="video" src="<%=awsLink%><%=video.url%>"></video>
+          <form action="/<%=video.id%>/watch/<%=video.urlname%>" method="GET">
+            <button class="addBtn">View Video Details</button>
+          </form>
+          <div class="headingAndDetails">
+            <div class="nameVideo">
+              <a href="#">
+                <h3><%=video.title%></h3>
+              </a>
+            </div>
+            <div class="lockUnlock">
+              <% if(video.status=="private") {%>
+              <div class="unlock">
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <% }else { %>
+              <div class=>
+                <i class="fa-solid fa-users"></i>
+              </div>
+              <% } %>
+            </div>
+            
+            <div class="share">
+              <i class="fas fa-share"></i>
+            </div>
+
+            <div class="shareOptions">
+              <div class="shareLink">
+                <i class="fas fa-link"></i>
+               
+                
+                <div style="display: none" id="link1<%=video.id%>">
+                  videorecorderbackend.herokuapp.com/<%=video.id%>/watch
+                </div>
+                <button onclick="copyToClipboard('link1<%=video.id%>')">
+                  share link
+                </button>
+                
+              </div>
+            </div>
+          </form>
+          </div>
+        </div>
+        <%}}else{%>
+          <!-- <div style="overflow-y: hidden;"> -->
+            <h3 class="text-center" style="left:55%">NO VIDEOS SHARED BY YOU</h3> 
+          <!-- </div> -->
+        <%}%>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+</body>
+<script>
+const videos = document.querySelectorAll(".video");
+const headingAndDetails = document.querySelectorAll(".headingAndDetails");
+const shares = document.querySelectorAll(".share");
+const shareOptions = document.querySelectorAll(".shareOptions");
+const lockUnlocks = document.querySelectorAll(".lockUnlock");
+const lock = document.querySelectorAll(".lock");
+videos.forEach((video, index) => {
+video.addEventListener("click", () => {
+  headingAndDetails[index].classList.toggle("seen");
+});
+});
+shares.forEach((share, index) => {
+share.addEventListener("click", () => {
+  shareOptions[index].classList.toggle("seenShareOption");
+});
+});
+lockUnlocks.forEach((lockUnlock, index) => {
+lockUnlock.addEventListener("click", () => {
+  lock[index].classList.toggle("lockSeen");
+});
+});
+</script>
+<script>
+function copyToClipboard(elementId) {
+// Create a "hidden" input
+console.log(elementId)
+var aux = document.createElement("input");
+console.log(document.getElementById(elementId).innerHTML)
+// Assign it the value of the specified element
+aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+console.log(aux)
+// Append it to the body
+document.body.appendChild(aux);
+
+
+// Highlight its content
+aux.select();
+
+document.execCommand('SelectAll');
+
+// Copy the highlighted text
+document.execCommand("copy");
+
+
+
+// Remove it from the body
+document.body.removeChild(aux);
+alert("Link Copied To Clipboard");
+}
+</script>

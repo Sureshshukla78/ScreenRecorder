@@ -1,0 +1,36 @@
+<!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://meet.google.com/* 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+<div style="text-align:center;" class="popup">
+    <img src="camera.png">
+    <h2>Screen Recorder</h2>
+
+    <h4>Would you like to record the meeting ?</h4>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+</div>
+<style>
+    img {
+        width: 50px;
+        height: 50px;
+    }
+    button{
+
+        display: inline-block;
+        outline: none;
+        cursor: pointer;
+        padding: 0 16px;
+        background-color: #625df5;
+        border-radius: 0.25rem;
+        border: 1px solid #0070d2;
+        color: #fff;
+        font-size: 13px;
+        line-height: 30px;
+        font-weight: 400;
+        text-align: center;
+
+    }
+    button:hover {
+        background-color: #005fb2;
+        border-color: #005fb2;
+    }
+</style>
+<script src="notification.js"></script>

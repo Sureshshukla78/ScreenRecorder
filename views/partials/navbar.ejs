@@ -1,0 +1,119 @@
+
+<style>
+  @media (max-width:780px){
+    #logout{
+      display: none;
+    }
+    .search-container{
+      display:none
+    }
+
+  }
+  .search-container{
+    /* position:fixed;
+    top:5px;
+    left:41%; */
+    margin-top:5px
+  }
+  .search-container input{
+    height: 1.5rem;
+    width: 30rem;
+    border-radius: 22px;
+    padding: 5px;
+  }
+  .search-container button{
+    height: 2.5rem;
+    width: 6rem;
+    border-radius: 22px;
+  }
+  .search-container li{
+    height: 1.5rem;
+    width: 30rem;
+    background-color:#ebebeb;
+    padding:5px
+  }
+  .search-container li:hover{
+    background-color:#d1cdcd
+  }
+  .search-container a{
+    text-decoration:none;
+    color:black
+  }
+
+</style>
+<navbar>
+  <div class="nav">
+    <a href="/">
+      <img src="../../img/logoForNav.png" class="loomLogo" />
+    </a>
+    <!-- <div class="iconNavi" id="selectButton"> -->
+      <!-- <i class="fas fa-search"></i>
+      <i class="far fa-bell"></i> -->
+      <%if(currentUser){%>
+        <!-- <div class="search-container">
+            <input id="searchKey" type="text" placeholder="Search.." name="search">
+            <button onclick="searchApi()">Search</button>
+            <ul type="none" id="myList">
+              
+            </ul>
+        </div> -->
+      <div id="logout">
+        <i class="fa-solid fa-user username"></i>&nbsp;<b class="username"><%-users%></b>
+        <button class="btn"><a href="/logout">Logout</a></button>
+      </div>
+      <%}else{%>
+        <div style="display: flex; "> 
+          <div id="signUp">
+            <button class="signUpbtn">
+              <a href="/register">Create Account</a>
+            </button>
+          </div>
+          <div id="signIn">
+            <button class="btn"><a href="/login">Sign In</a></button>
+          </div>
+        </div>
+      <%}%>
+    <!-- </div> -->
+  </div>
+</navbar>
+<script>
+  function searchApi() {
+    let list = document.getElementById("myList");
+    removeAllChildNodes(list)
+    function removeAllChildNodes(list) {
+    while (list.firstChild) {
+        list.removeChild(list.firstChild);
+    }
+}
+    fetch(`https://meet.atg.party/search/${document.getElementById("searchKey").value}`)
+  .then((response) => response.json())
+  .then((data) => {
+
+    data.forEach((item)=>{
+      let a = document.createElement("a");
+      let li = document.createElement("li");
+      li.innerText = item.title;
+      a.href=`${item.id}/watch`;
+      a.appendChild(li)
+      list.appendChild(a);
+    });
+    })
+  }
+  let regex = /[/]$/;
+  let url=RegExp("https://meet.atg.party/\[0-9]+/watch")
+  if(url.test(location.href)){
+    document.getElementsByClassName("signUpbtn")[0].classList.add("btn")
+    if(window.innerWidth<=780){
+      document.getElementById("signUp").style.display = "none";  
+    }
+  }
+  if (location.href.match(regex) || location.href.includes("/register")) {
+    document.getElementById("signIn").style.display = "";
+    document.getElementById("signUp").style.display = "none";
+  }else if (location.href.includes("/login")) {
+    document.getElementById("signUp").style.display = "";
+    document.getElementById("signIn").style.display = "none";
+  }else if(location.href.includes("/register")){
+    document.getElementById("signUp").style.display = "";
+  }
+</script>

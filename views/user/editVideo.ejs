@@ -1,0 +1,104 @@
+<link rel="stylesheet" href="../../css/setting.css" />
+<%if(!currentUser){%>
+  <link rel="stylesheet" href="../../css/home.css" />
+  <style>
+    .videoDetails {
+      position: absolute;
+      height: 80vh;
+      left: 20%;
+      align-items: center;
+    }
+
+    .details {
+      font-size: 2rem;
+    }
+
+    .video {
+      text-align: start;
+    }
+  </style>
+  <%}%>
+    <script src="https://kit.fontawesome.com/afb23c7fce.js" crossorigin="anonymous"></script>
+    <section>
+      <div id="editContent">
+        <%if(currentUser){%>
+          <%if(userData.userId==video.user_id || permission.permission=="Write"){%>
+            <div class="nameAndPhoto">
+              <form action="/<%=video.id%>/watch/changeDetails" method="POST">
+                <h2 style="text-align: center; margin-bottom: 5px; border-bottom: 2px solid black; font-size: larger;">Edit Details</h2>
+                <label style="margin-top: 1rem; color: black;" for="name">Change Title: </label>
+                <input type="text" name="name" id="name" style="margin-top: 10px" class="input"
+                  value="<%-video.title%>" />
+                  <label style="margin-top: 10px; color: black;">Public or Private</label>
+                  <div class="status" style="display: flex">
+                    <div style="width: 100px">
+                      <label style="font-size: 1rem" for="publicOrPrivate">Public :</label><br />
+                      <label style="font-size: 1rem" for="publicOrPrivate">Private:</label>
+                    </div>
+                    <div class="align" style="display: flex; flex-direction: column">
+                      <input type="radio" name="status" id="publicOrPrivate" required value="public" class="input" />
+                      <input type="radio" name="status" id="publicOrPrivate" value="private" class="input" checked />
+                    </div>
+                  </div>
+                
+                <label style="margin-top: 10px; color: black;" for="email">Add Team Members:
+                </label>
+                <input style="margin-top: 1rem" type="text" name="addMember" id="emaildet" class="input" />
+                <label for="permission">Permission</label>   
+                <select id="permission" name="permission">
+                  <option value="Read">Read</option>
+                  <option value="Write">Write</option>
+                </select>
+
+                <label style="margin-top: 10px; color: black;" for="email">Remove Team Members:
+                </label>
+                <input style="margin-top: 1rem" type="text" name="removeMember" id="email" class="input" />
+                <label style="margin-top: 1rem; margin-bottom: 1rem; color: black;" for="notes">Meeting Notes:</label>
+                <textarea style="width: 500px; height: 200px; margin: 2rem 0; font-size: 1rem;border-color: 2px solid hsla(240, 8%, 46%, 0.2);
+          border-radius: 2%;" type="text" name="meetingNotes" video></textarea>
+                <div class="buttonsForName">
+                  <button type="submit" class="saveBtn" style="margin-left: 0px;">Submit</button>
+                </div>
+                <div hidden ><input hidden id="notes" type="text" value="<%=video.notes%>" /></div>
+                <div hidden><input hidden id="status-value" type="text" value="<%=video.status%>"/></div>
+              </form>
+            </div>
+            <%}}%>
+      </div>
+    </section>
+    <!-- adding ckeditor and adding its value -->
+    <script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
+    <script>
+      var notes = document.getElementById('notes').value;
+      console.log(notes);
+      CKEDITOR.replace('meetingNotes', {
+        width: ['550px']
+      }).setData(notes)
+      // ending of ckeditor
+
+      // setting public private status of video 
+      var status = document.getElementById('status-value').value
+      var radio = document.getElementsByName('status')
+      if (status == 'public') {
+        radio[0].checked = true
+      } else {
+        radio[1].checked = true
+      }
+      setTimeout(()=>{
+        var newWidth = window.innerWidth;
+        if(newWidth<550){
+          document.getElementById('cke_meetingNotes').style.width='350px'
+        }
+      },1000)
+      window.addEventListener('resize', function(event){
+    var newWidth = window.innerWidth;
+    var newHeight = window.innerHeight; 
+    console.log(newWidth);
+    if(newWidth <= 550){
+      document.getElementById('cke_meetingNotes').style.width='350px'
+    }
+    if(newWidth > 550){
+      document.getElementById('cke_meetingNotes').style.width='550px'
+    }
+});
+    </script>

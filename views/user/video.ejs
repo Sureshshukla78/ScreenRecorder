@@ -1,0 +1,177 @@
+
+    <script
+      src="https://kit.fontawesome.com/afb23c7fce.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="../../css/setting.css" />
+    
+  
+
+  <body>
+    <%let arr=[]; for(let i=0;i<uservideo.length;i++){%>
+      <%arr.push(uservideo[i].team_members)%>
+    <%}%>
+  <% console.log("teammembers",arr);console.log("owner",userData.email);if((arr.includes(userData.email)) || (userData.userId==user.id)){ %> 
+      <section>
+        <div class="setting">
+          <div class="heading">
+           
+            <h1 style="text-align: center">Video Details</h1>
+          </div>
+          <!-- <div class="navigationLink">
+            <a href="#" class="selectedLink">My Account</a>
+            <a href="#" class="notSelected">Notifications</a>
+            <a href="#" class="notSelected">Integrations</a>
+          </div> -->
+          <div
+            class="videoContainer"
+            style="
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            "
+          >
+         
+            <!-- <video src= type="video/mp4"></video> -->
+            <div class="video">
+              
+             
+              <video controls>
+                <source src="<%=awsLink%><%=video.url%>" type="video/mp4" />
+              </video>
+            </div>
+
+            <p style="margin-top: 5rem">
+              <span style="font-weight: 900; color: #525aa4">Title:</span>
+              <%=video.title%>
+            </p>
+            <p style="margin-top: 5rem">
+              <span style="font-weight: 900; color: #525aa4"
+                >Team Members Gmails:</span
+              >
+            </p>
+         <% if(arr){ %> 
+            <ul style="margin: 1rem">
+              <%for(let i of arr){%>
+                <%if(i!=null){%>
+              <li><%=i%></li>
+                <%}}%>
+            </ul>
+           <%}%>
+            <p style="margin-top: 5rem">
+              <span style="font-weight: 900;  color: #525aa4"
+                >Meeting Notes:</span
+              >
+              <%-video.notes%>
+            </p>
+            <p style="margin-top: 5rem">
+              <span style="font-weight: 900; color: #525aa4">Status:</span>
+              <%=video.status%>
+            </p>
+          </div>
+          <hr style="margin: 5rem 0" />
+          <%if(userData.userId==video.user_id){%>
+          <div class="nameAndPhoto">
+            <form action="/<%=video.id%>/watch/changeFileName" method="POST">
+              <label for="name">Change Title: </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                style="margin-top: 2rem"
+                class="input"
+              />
+              <div class="buttonsForName">
+                <button type="submit" class="saveBtn">Change</button>
+              </div>
+            </form>
+            <form action="/<%=video.id%>/watch/teamMembers/add" method="POST">
+              <label style="margin-top: 3rem" for="email"
+                >Team Members Email:
+              </label>
+              <input
+                style="margin-top: 2rem"
+                type="email"
+                name="teamMembers"
+                id="email"
+                value=""
+                class="input"
+
+              />
+              <div class="buttonsForName">
+                <button type="submit" class="saveBtn">Add</button>
+              </div>
+            </form>
+
+            <form action="/<%=video.id%>/watch/meetingNotes" method="POST">
+              <label style="margin-top: 3rem" for="notes">Meeting Notes:</label>
+              <textarea
+                style="
+                  width: 500px;
+                  height: 200px;
+                  margin: 2rem 0;
+                  font-size: 1rem;
+                  border-color: 2px solid hsla(240, 8%, 46%, 0.2);
+                  border-radius: 2%;
+                "
+                type="text"
+                id="notes"
+                name="meetingNotes"
+              ></textarea>
+              <div class="buttonsForName">
+                <button class="saveBtn">Add notes</button>
+              </div>
+            </form>
+
+            <h2 style="margin-top: 3rem">Public or Private</h2>
+            <form action="/<%=video.id%>/watch/publicOrPrivate" method="POST">
+              <div class="status" style="display: flex">
+                <div style="width: 100px">
+                  <label style="font-size: 1rem" for="publicOrPrivate"
+                    >Public :</label
+                  ><br />
+                  <label style="font-size: 1rem" for="publicOrPrivate"
+                    >Private:</label
+                  >
+                </div>
+                <div
+                  class="align"
+                  style="display: flex; flex-direction: column"
+                >
+                  <input
+                    type="radio"
+                    name="status"
+                    id="publicOrPrivate"
+                    required
+                    value="public"
+                class="input"
+
+                  />
+                  <input
+                    type="radio"
+                    name="status"
+                    id="publicOrPrivate"
+                    value="private"
+                class="input"
+
+                  />
+                </div>
+              </div>
+              <div class="buttonsForName">
+                <button class="saveBtn">Submit</button>
+              </div>
+            </form>
+          </div>
+          <%}}else {%>
+          <h3 class="text-center" style="text-align: center;font-size:2rem;position: absolute;left:28%;top:50%">Not Authorised User. Please Request Permission From The Owner </h3>
+          <%}%>
+        </div>
+      </section>
+    </div>
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script>CKEDITOR.replace('meetingNotes',{
+      width:['550px']
+   })</script>
+  </body>
+</html>

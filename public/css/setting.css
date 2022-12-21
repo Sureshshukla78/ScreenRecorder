@@ -1,0 +1,962 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; */
+}
+.nav {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0px;
+  justify-content: space-between;
+  background: #f8f6f0;
+  height: 4rem;
+  width: 100%;
+  z-index: 9997;
+}
+
+.loomLogo {
+  width: 14rem;
+  margin: 0.5rem 2rem;
+}
+/* .iconNavi {
+  margin: 35px;
+  padding: -3px;
+}
+.iconNavi i {
+  padding: 1px 12px;
+} */
+
+.firstFullContainer {
+  padding: 19px 19px;
+  height: 100%;
+  width: 254px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #f8f6f0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.firstContainer {
+  position: relative;
+  top: 109px;
+}
+.threeContainer {
+  display: flex;
+  padding: 14px 11px;
+  margin: 9px 0px 0px 0px;
+}
+.selected {
+  border: none;
+  background-color: #e2e2e6;
+  border-radius: 7px;
+  width: 15em;
+  height: 26px;
+}
+.threeContainer i {
+  padding: 6px 11px;
+}
+.threeContainer a {
+  display: flex;
+  text-decoration: none;
+  color: #100d0f;
+  font-size: 14px;
+}
+section {
+  /* padding: 67px; */
+  margin-left: 297px;
+  font-size: 28px;
+  padding: 0px 10px;
+  overflow-x: hidden;
+}
+.btn {
+  margin: 1rem;
+  /* display: flex; */
+  /* justify-content: center; */
+  width: 6rem;
+  height: 2.2rem;
+  text-align: center;
+  border-radius: 19px;
+  border: transparent;
+  background-color: #4b42ad;
+}
+
+.btn a {
+  font-size: 16px;
+  color: #f8f6f0;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.setting {
+  padding: 25px 13px;
+}
+.settings {
+  padding: 25px 13px;
+}
+
+.heading {
+  padding: 15px 0px;
+  margin-left: -5rem;
+}
+.heading h2 {
+  font-size: 16px;
+  color: #868585;
+  font-weight: 800;
+}
+.heading h1 {
+  color: #212121;
+  font-weight: 900;
+  font-size: 30px;
+}
+.navigationLink {
+  padding: 7px 0px 15px;
+}
+.navigationLink a {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0px 7px 9px;
+}
+.notSelected {
+  color: #868585;
+}
+.selectedLink {
+  color: #212121;
+  border-bottom: 3px solid #625df5;
+}
+.nameAndPhoto {
+  padding: 22px 0px;
+  border-bottom: 3px solid hsla(240, 8%, 46%, 0.2);
+}
+.nameAndPhoto h2 {
+  font-size: 19px;
+  font-weight: 800;
+  color: #212121;
+}
+.circleBox {
+  border: 2px solid #212121;
+  display: inline-block;
+  border-radius: 50%;
+  width: 142px;
+  position: relative;
+  /* text-align: center; */
+  margin: 19px;
+  padding: 8px;
+  left: 26px;
+  height: 129px;
+  cursor: pointer;
+}
+.circleBox i {
+  font-size: 31px;
+  padding: 45px;
+  position: relative;
+  left: 10px;
+  top: 3px;
+  color: #2b2b2b;
+}
+.nameAndPhoto form {
+  display: flex;
+  flex-direction: column;
+}
+.nameAndPhoto form label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #5e5c5c;
+  margin-top: 3rem;
+}
+.nameAndPhoto .input {
+  width: 302px;
+  margin: 10px 0px 15px;
+  border-radius: 6px;
+  height: 19px;
+  padding: 10px;
+  border: 2px solid hsla(240, 8%, 46%, 0.2);
+  color: #212121;
+  font-weight: 600;
+}
+.buttonsForName {
+  display: flex;
+}
+.buttonsForName button {
+  margin: 7px 12px;
+  width: 96px;
+  text-align: center;
+  height: 35px;
+  border-radius: 9px;
+  font-weight: 600;
+  font-size: 17px;
+}
+.saveBtn {
+  background-color: #4b42ad;
+  color: #f8f6f0;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+}
+.cancelBtn {
+  color: #212121;
+  background-color: #f8f6f0;
+  border: 2px solid hsla(240, 8%, 46%, 0.2);
+}
+.contactInfoUpdates {
+  padding: 38px 0px;
+  border-bottom: 3px solid hsla(240, 8%, 46%, 0.2);
+}
+.contactInfoUpdates h2 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #212121;
+}
+.contactInfoUpdates h3 {
+  font-size: 17px;
+  font-weight: 800;
+  color: #5e5c5c;
+  padding: 10px 0px;
+}
+.contactInfoUpdates form {
+  display: flex;
+}
+.emailForm {
+  display: flex;
+  flex-direction: column;
+}
+.emailForm label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #5e5c5c;
+}
+.emailForm input {
+  width: 266px;
+  border-radius: 6px;
+  height: 19px;
+  padding: 10px;
+  border: 2px solid hsla(240, 8%, 46%, 0.2);
+  color: #212121;
+  font-weight: 600;
+  margin: 11px 13px 0px 0px;
+}
+.connctedAccount {
+  display: flex;
+  flex-direction: column;
+}
+.saveTheVideo {
+  display: flex;
+  flex-direction: column;
+}
+#permission{
+  width: 20rem;
+  height: 2rem;
+}
+.connctedAccount label {
+  font-size: 19px;
+  font-weight: 600;
+  color: #5e5c5c;
+}
+.connectWithGoogle {
+  margin: 7px 30px 8px 3px;
+  width: 285px;
+  height: 49px;
+  text-align: center;
+  border-radius: 8px;
+  background-color: transparent;
+  border: 2px solid hsla(240, 8%, 46%, 0.2);
+  color: #212121;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.connectWithGoogle a {
+  text-decoration: none;
+}
+.connectWithGoogle img {
+  width: 32px;
+  margin: 7px;
+}
+.saveTheVideo label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #5e5c5c;
+}
+.connectWithSlack {
+  margin: 7px 30px 8px 3px;
+  width: 285px;
+  height: 49px;
+  text-align: center;
+  border-radius: 8px;
+  background-color: transparent;
+  border: 2px solid hsla(240, 8%, 46%, 0.2);
+  color: #212121;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.connctedAccount a {
+  text-decoration: none;
+}
+.password {
+  padding: 38px 0px;
+  border-bottom: 3px solid hsla(240, 8%, 46%, 0.2);
+}
+.password h2 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #212121;
+}
+.password h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #5e5c5c;
+  padding: 10px 0px;
+  margin-bottom: 75px;
+}
+.currentPassword {
+  display: flex;
+  flex-direction: column;
+}
+.currentPassword label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #5e5c5c;
+}
+.currentPassword input {
+  width: 266px;
+  border-radius: 6px;
+  height: 19px;
+  padding: 10px;
+  border: 2px solid hsla(240, 8%, 46%, 0.2);
+  color: #212121;
+  font-weight: 600;
+  margin: 11px 13px 9px 0px;
+}
+.confirmationPassword {
+  display: flex;
+}
+.newPassword {
+  display: flex;
+  flex-direction: column;
+}
+.newPassword label,
+.confirmPassword label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #5e5c5c;
+}
+.newPassword input,
+.confirmPassword input {
+  width: 266px;
+  margin: 4px 0px 15px;
+  border-radius: 6px;
+  height: 19px;
+  padding: 10px;
+  border: 2px solid hsla(240, 8%, 46%, 0.2);
+  color: #212121;
+  font-weight: 600;
+  margin: 11px 13px 0px 0px;
+}
+.confirmPassword {
+  display: flex;
+  flex-direction: column;
+}
+.resetBtn {
+  width: 188px;
+  text-align: center;
+  height: 42px;
+  border-radius: 9px;
+  background-color: #4b42ad;
+  color: #f8f6f0;
+  border: none;
+  font-weight: 600;
+  font-size: 17px;
+  margin: 8px 3px 19px;
+}
+.savingCancelling button {
+  width: 110px;
+  text-align: center;
+  height: 42px;
+  /* position: relative; */
+  /* left: 106px; */
+  /* top: 6px; */
+  border-radius: 9px;
+  background-color: #d9d7d3;
+  /* color: #f8f6f0; */
+  border: none;
+  font-weight: 600;
+  font-size: 17px;
+}
+.deleteAccount {
+  padding: 38px 0px;
+}
+.deleteAccount h2 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #212121;
+}
+.deleteBtn {
+  background-color: #ff623e;
+  width: 141px;
+  height: 34px;
+  margin: 20px 3px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+#btn{
+  display: none;
+}
+#user-icon{
+  display: none;
+}
+#close{
+  display: none;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.removeBtn {
+  display: block;
+  width: 130px;
+  height: 30px;
+  background: #4b42ad;
+  padding-top: 1px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  line-height: 25px;
+  z-index: 99;
+}
+
+.btn {
+  /* margin: 1rem; */
+  padding-top: 1px;
+  width: 6rem;
+  height: 2.2rem;
+  text-align: center;
+  border-radius: 19px;
+  border: transparent;
+  background-color: #4b42ad;
+}
+
+.btn a {
+  font-size: 16px;
+  color: #f8f6f0;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.video {
+  height: 60vh;
+  text-align: center;
+}
+
+.video video {
+  height: 100%;
+  width: 60vw;
+}
+
+.custom-file-input {
+  color: transparent;
+  font-family: inherit;
+  font-weight: bold;
+  padding: 0;
+  width: 9vw;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: "Upload";
+  display: inline-block;
+  line-height: 25px;
+  /* background-color: #4b42ad; */
+  color: #f8f6f0;
+  background: -webkit-linear-gradient(top, #4b42ad, #4b42ad);
+  outline: none;
+  white-space: nowrap;
+  --webkit-user-select: none;
+  cursor: pointer;
+  width: 114px;
+  height: 30px;
+  margin-left: 0.5rem;
+  text-align: center;
+  font-size: 14px;
+  word-spacing: 3px;
+  border: none;
+  border-radius: 6px;
+}
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active {
+  outline: 0;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+#logout_sidebar{
+  display: none;
+}
+.dropbtn {
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  top: -5px;
+}
+
+.dropdown-content {
+  font-size: 1.5rem;
+  right: -10px;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+.dropDownDiv:hover{
+  background-color: #f1f1f1;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+.sharedMembers{
+  display:flex
+}
+@media (max-width: 1069px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .heading {
+    padding: 15px 0px;
+  }
+
+  .setting {
+    position: absolute;
+    top: 10rem;
+    left: 10%;
+    z-index: 3;
+  }
+  .settings {
+    position: absolute;
+    top: 10rem;
+    left: 10%;
+    z-index: 3;
+  }
+  .heading h1 {
+    font-size: 30px;
+    /* text-align: center; */
+    /* margin-right: 50%; */
+  }
+
+  .firstFullContainer {
+    position: relative;
+    /* top: 4rem; */
+    /* display: flex; */
+    /* justify-content: space-between; */
+    height: 3rem;
+    width: 100%;
+    z-index: 9;
+  }
+
+  .firstContainer h3 {
+    display: none;
+  }
+  .firstContainer {
+    display: flex;
+    /* position: absolute; */
+    justify-content: space-between;
+    margin: 0 15%;
+    /* width: 100vh; */
+    /* height: 100vh; */
+    top: 1.8rem;
+  }
+  .firstContainer a {
+    padding: 3px;
+  }
+  .threeContainer {
+    display: flex;
+    padding: 2px 0;
+    margin: 10px 0px 0px 0px;
+  }
+
+  .threeContainer a {
+    display: flex;
+    text-decoration: none;
+    color: #100d0f;
+    font-size: 11px;
+  }
+  .selected {
+    width: auto;
+  }
+  .contactInfoUpdates h2 {
+    font-size: 16px;
+  }
+  .contactInfoUpdates h3 {
+    display: inline-block;
+    font-size: 14px;
+  }
+  .navigationLink a {
+    font-size: 16px;
+  }
+  .nameAndPhoto h2 {
+    font-size: 16px;
+  }
+  .nameAndPhoto form input {
+    height: 15px;
+  }
+  .buttonsForName button {
+    width: 4rem;
+  }
+  .emailForm label {
+    font-size: 16px;
+  }
+  .currentPassword label {
+    font-size: 16px;
+    margin-top: -5rem;
+  }
+  .newPassword label,
+  .confirmPassword label {
+    font-size: 16px;
+  }
+  .resetBtn {
+    width: 9rem;
+    font-size: 14px;
+  }
+  .confirmationPassword {
+    display: flex;
+    flex-direction: column;
+  }
+  .newPassword input,
+  .confirmPassword input,
+  .currentPassword input {
+    height: 16px;
+  }
+  .confirmPassword label {
+    margin-top: 1rem;
+  }
+  .nameAndPhoto form label {
+    font-size: 16px;
+  }
+  .password h2 {
+    font-size: 16px;
+  }
+  .password h3 {
+    font-size: 14px;
+    line-height: 1.2rem;
+    padding-right: 3rem;
+  }
+  .buttonsForName button {
+    font-size: 14px;
+  }
+}
+@media(max-width:1070px){
+  .video{
+    position: relative;
+    left: 22%;
+  }
+}
+
+@media (max-width: 692px) {
+  .firstContainer{
+      left: 28%;
+  }
+  #file{
+    width: 125px;
+    height: 35px;
+  }
+  .fullContainer{
+    display: none;
+  }
+  #btn{
+    display: block;
+    right: 40%;
+  }
+  #user-icon{
+    display: block;
+    right: 10%;
+  }
+  #close{
+    display: block;
+  }
+  section{
+    margin-left: 0px;
+    margin-top: 3rem;
+  }
+  .video video {
+    height: 50%;
+    width: 90vw;
+  }
+  .video{
+    position: relative;
+    left: 0%;
+  }
+  .username{
+    display: none;
+  }
+  .loomLogo{
+    width: 14rem;
+    margin: 0.5rem 1rem;
+  }
+  body {
+    overflow-x: hidden;
+  }
+
+  .heading {
+    padding: 15px 0px;
+    flex-direction: column;
+    margin-left: 0;
+  }
+  #logout_sidebar{
+    display: block;
+  }
+  .setting {
+    margin-left: -25px;
+    padding: 25px 0px;
+    position: absolute;
+    top: 3rem;
+    left: 10%;
+    z-index: 3;
+  }
+  .settings {
+    /* margin-left: -25px; */
+    padding: 25px 0px;
+    position: absolute;
+    top: 15rem;
+    left: 4%;
+    z-index: 3;
+  }
+  .sharedMembers{
+    display:flex;
+  }
+  .heading h1 {
+    font-size: 30px;
+    text-align: center;
+    /* margin-right: 50%; */
+  }
+
+  .firstFullContainer {
+    position: fixed;
+    top: 1rem;
+    display: flex;
+    height: 14rem;
+    width: 100%;
+    z-index: 9;
+  }
+
+  .firstContainer h3 {
+    display: none;
+  }
+  .firstContainer {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0;
+    /* width: 100vh; */
+    /* height: 100vh; */
+    top: 3rem;
+  }
+  .firstContainer a {
+    padding: 3px;
+  }
+  .threeContainer {
+    display: flex;
+    padding: 2px 0;
+    margin: 10px 0px 0px 0px;
+  }
+
+  .threeContainer a {
+    display: flex;
+    text-decoration: none;
+    color: #100d0f;
+    font-size: 11px;
+  }
+  .selected {
+    width: auto;
+  }
+  .contactInfoUpdates h2 {
+    font-size: 16px;
+  }
+  .contactInfoUpdates h3 {
+    display: inline-block;
+    font-size: 14px;
+  }
+  .navigationLink a {
+    font-size: 16px;
+  }
+  .nameAndPhoto h2 {
+    font-size: 16px;
+  }
+  .nameAndPhoto form input {
+    height: 15px;
+  }
+  .buttonsForName button {
+    width: 4rem;
+  }
+  .emailForm label {
+    font-size: 16px;
+  }
+  .currentPassword label {
+    font-size: 16px;
+    margin-top: -5rem;
+  }
+  .newPassword label,
+  .confirmPassword label {
+    font-size: 16px;
+  }
+  .resetBtn {
+    width: 9rem;
+    font-size: 14px;
+  }
+  .confirmationPassword {
+    display: flex;
+    flex-direction: column;
+  }
+  .newPassword input,
+  .confirmPassword input,
+  .currentPassword input {
+    height: 16px;
+  }
+  .confirmPassword label {
+    margin-top: 1rem;
+  }
+  .nameAndPhoto form label {
+    font-size: 16px;
+  }
+  .password h2 {
+    font-size: 16px;
+  }
+  .password h3 {
+    font-size: 14px;
+    line-height: 1.2rem;
+    padding-right: 3rem;
+  }
+  .buttonsForName button {
+    font-size: 14px;
+  }
+  .sharedMembers{
+    display:block;
+  }
+  .details{
+    position: absolute;
+    top: 17rem;
+  }
+}
+@media (max-width:520px) and (min-width:400px){
+  #btn{
+    right:35%
+  }
+  #user-icon{
+    display: block;
+    right: 20%;
+  }
+  .firstContainer{
+    left: 32%;
+  }
+}
+@media (max-width:400px){
+  .circleBox {
+    margin-left:18%;
+    }
+    .btns{
+      margin-left: 8%;
+    }
+    #btn{
+      right:32%
+    }
+    #user-icon{
+      display: block;
+      right: 16%;
+    }
+    .firstContainer{
+      left: 28%;
+    }
+}

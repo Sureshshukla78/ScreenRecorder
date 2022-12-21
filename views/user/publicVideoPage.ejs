@@ -1,0 +1,219 @@
+<link rel="stylesheet" href="../../css/setting.css" />
+
+<%if(!currentUser){%>
+  <link rel="stylesheet" href="../../css/home.css" />
+  <style>
+    .videoDetails {
+      position: absolute;
+      height: 80vh;
+      left: 20%;
+      align-items: center;
+    }
+
+    .details {
+      font-size: 2rem;
+    }
+
+    .video {
+      text-align: start;
+    }
+  </style>
+  <%}%>
+    <script src="https://kit.fontawesome.com/afb23c7fce.js" crossorigin="anonymous"></script>
+
+    <body>
+      <section>
+            <%if(currentUser){%>
+              <div class="heading" style="margin-left:0;display: flex; justify-content: center; align-items: center; width: 100%;margin-top: 3rem;">
+                <h1>
+                  <%=video.title%>
+                </h1>
+                <div style="display:flex;margin:10px">
+                <%if(video.status==='private' ){%>
+                  <span
+                    style="display: flex; align-items: center; justify-content: center; background-color: #2264EC; border-radius: 5px; font-weight: bold; 
+                  color: white; font-size: 1rem; padding: 3px;  width: 70px; margin-left: 8px; height: 1.5rem;">Private</span>
+                  <%} else {%>
+                    <span
+                      style="display: flex; align-items: center; justify-content: center; background-color: #04AA6D; border-radius: 5px; font-weight: bold; 
+                    color: white; font-size: 1rem; padding: 3px; width: 60px; margin-left: 8px; height: 1.5rem;">Public</span>
+                    <%}%>
+                      <!-- <form action="/<%=video.id%>/edit" method="GET"> -->
+                    <%if(userData.userId==video.user_id || permission.permission=="Write"){%>
+                      <button id="edit"
+                        style=" outline: none; border: none; display: flex; align-items: center; justify-content: center; background-color: #2264EC; border-radius: 5px; font-weight: bold; 
+                    color: white; font-size: 1rem; padding: 5px; cursor: pointer;  width: 61px; margin-left: 6px; height: 1.9rem;"><i
+                          class="fa-solid fa-pencil" style="margin-right: 4px;"></i>
+                        <a style="color: white; text-decoration: none;" href="/<%=video.id%>/edit">Edit</a>
+                      </button>
+                      <%}%>
+                      <%if(userData.userId==video.user_id){%>
+                    <button id="delete" onclick="deleteVideo()" style="outline: none; border: none; display: flex; align-items: center; justify-content: center; background-color: red; border-radius: 5px; font-weight: bold; 
+                    color: white; font-size: 1rem; padding: 5px; cursor: pointer;  width: 61px; margin-left: 6px; height: 1.9rem;">
+                    Delete
+                    </button>
+                    <input hidden type="text" value="<%-video.id%>" name="" id="videoId">
+                    <%}%>
+                  </div>
+                      <!-- </form> -->
+              </div>
+              <%}else{%>
+                <div class="heading" style="display: flex; justify-content: center; align-items: center; width: 100%;margin-top: 3rem;">
+                  <h1>
+                    <%=video.title%>
+                  </h1>
+                  <div style="display:flex;margin:10px">
+                  <%if(video.status==='private' ){%>
+                    <span
+                      style="display: flex; align-items: center; justify-content: center; background-color: #2264EC; border-radius: 5px; font-weight: bold; 
+                    color: white; font-size: 1rem; padding: 3px;  width: 70px; margin-left: 8px; height: 1.5rem;">Private</span>
+                    <%} else {%>
+                      <span
+                        style="display: flex; align-items: center; justify-content: center; background-color: #04AA6D; border-radius: 5px; font-weight: bold; 
+                      color: white; font-size: 1rem; padding: 3px; width: 60px; margin-left: 8px; height: 1.5rem;">Public</span>
+                      <%}%>
+                  </div>
+                </div>
+                <%}%>
+                <div class="settings">
+                  <div class="videoContainer" style="display: flex; flex-direction: column; justify-content: center;">
+                    <div class="video">
+                      <video controls preload="metadata">
+                        <source src="<%=awsLink%><%=video.url%>" type="video/mp4" />
+                      </video>
+                    </div>
+                    
+                    <div class="details">
+
+                      <%if(currentUser){%>
+                        <%if(team_member.length){%>
+                          <p style="margin-left: 1.6rem;margin-top: 20px;">
+                            <span style="font-weight: 900; font-size: 1.2rem ; color: #525aa4">Shared With:</span>
+                        </p>
+                        <ul style="margin-left: 1rem">
+                          <%for(let i of team_member){%>
+                            <%if(i!=null){%>
+                              <div class="sharedMembers" style="max-width: 35rem;justify-content: space-between;padding:0px 0 0 14px;">
+                              <li style="font-size: 1.2rem ">
+                                <%=i.email%>
+                              </li>
+                              <div class="dropdown">
+                                <%if(i.permission=="Write"){%>
+
+                                <button style="background-color: #04AA6D;
+                                border-radius: 10px;
+                                padding: 5px;margin: 10px 0px 5px 0;color: white;" onclick="myFunction('<%-i.email%>')" class="dropbtn">Permission : <%-i.permission%></button>
+                                <%}else{ %>
+                                  <button style="background-color: #2264EC;
+                                  border-radius: 10px;
+                                  padding: 5px;margin: 10px 0px 5px 0;color: white" onclick="myFunction('<%-i.email%>')" class="dropbtn">Permission : <%-i.permission%></button>
+                                  <%}%>
+                                <%if(permission.permission=="owner"){%>
+                                <div hidden id="myDropdown<%-i.email%>" class="dropdown-content">
+                                  <div class="dropDownDiv" style="display: flex;padding: 6px 0px 6px 3px;">
+                                    <a style="font-size: smaller;" href="/<%-video.id%>/changePermission/<%-i.email%>/Read">Read</a>
+                                  </div>
+                                  <div class="dropDownDiv" style="display: flex;padding: 6px 0px 6px 3px;">
+                                    <a style="font-size: smaller;" href="/<%-video.id%>/changePermission/<%-i.email%>/Write">Write</a>
+                                  </div>
+                                </div>
+                                <%}%>
+                              </div>
+                            </div>
+                            <%}else{ %>
+                              <p> No members </p>
+                              <%}%>
+                              <% }%>
+                              
+                            </ul>
+                            <% }%>
+                            <%}%>
+                            <%if(video.notes){%>
+                              <div style="font-size: 1rem;padding: 30px;">
+                                <span style="font-weight: 900; font-size: 1.2rem; color: #525aa4">Meeting Notes:</span>
+                                <%- video.notes%>
+                              </div>
+                              <% }%>
+                  </div>
+                </div>
+                  <!-- edit content -->
+                  <!-- <div id="editContent" style="display: none;">
+                    <%if(currentUser){%>
+                      <hr style="margin: 1rem 0" />
+                      <%if(userData.userId==video.user_id){%>
+                        <div class="nameAndPhoto">
+                          <form action="/<%=video.id%>/watch/changeDetails" method="POST">
+                            <label style="margin: 0rem;" for="name">Change Title: </label>
+                            <input type="text" name="name" id="name" style="margin-top: 1rem" class="input"
+                              value="<%-video.title%>" />
+                            <label style="margin-top: 1rem" for="email">Add Team Members:
+                            </label>
+                            <input style="margin-top: 1rem" type="email" name="addMember" id="emaildet" class="input" />
+
+
+                            <label style="margin-top: 1rem" for="email">Remove Team Members:
+                            </label>
+                            <input style="margin-top: 1rem" type="email" name="removeMember" id="email" class="input" />
+                            <label style="margin-top: 1rem; margin-bottom: 1rem" for="notes">Meeting Notes:</label>
+                              <textarea style="width: 500px; height: 200px; margin: 2rem 0; font-size: 1rem;border-color: 2px solid hsla(240, 8%, 46%, 0.2);
+                            border-radius: 2%;"
+                            type="text" id="notes" name="meetingNotes" video></textarea>
+                           
+  
+                            <h2 style="margin-top: 2rem">Public or Private</h2>
+                          
+                            <div class="status" style="display: flex">
+                              <div style="width: 100px">
+                                <label style="font-size: 1rem" for="publicOrPrivate">Public :</label><br />
+                                <label style="font-size: 1rem" for="publicOrPrivate">Private:</label>
+                              </div>
+                              <div class="align" style="display: flex; flex-direction: column">
+                                <input type="radio" name="status" id="publicOrPrivate" required value="public"
+                                  class="input" />
+                                <input type="radio" name="status" id="publicOrPrivate" value="private" class="input"
+                                  checked />
+                              </div>
+                            </div>
+                            <div class="buttonsForName">
+                              <button type="submit" class="saveBtn" style="margin-left: 0px;">Submit</button>
+                            </div>
+                          </form>
+                        </div>
+                        <%}}%>
+                  </div>  -->
+                </div>
+          </section>
+          </div>
+    </body>
+
+    </html>
+    <script>
+      function deleteVideo(){
+       let value=confirm("The video will be permenently deleted");
+       let id=document.getElementById("videoId").value;
+        console.log(value);
+        if(value){
+          window.location.replace(`https://meet.atg.party/${id}/deleteVideo`)
+        }
+      }
+      window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+} 
+function myFunction(teamMmber) {
+  let hiddenStatus=document.getElementById(`myDropdown${teamMmber}`).hidden;
+  console.log(hiddenStatus);
+  if(hiddenStatus){
+    document.getElementById(`myDropdown${teamMmber}`).hidden=false
+  }else
+  document.getElementById(`myDropdown${teamMmber}`).hidden=true
+}
+    </script>

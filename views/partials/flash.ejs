@@ -1,0 +1,7 @@
+
+<link rel="stylesheet" href="./css/flash.css" />
+<%if(success &&success.length){%>
+<div class="success flashBtn" role="alert"><%= success%></div>
+<%}else if(error &&error.length){%>
+<div class="error flashBtn" role="alert"><%= error%></div>
+<%}%>

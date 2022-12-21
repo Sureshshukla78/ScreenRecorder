@@ -1,0 +1,192 @@
+<link rel="stylesheet" href="./css/setting.css" />
+
+<section>
+  <div class="setting">
+    <div class="heading" style="margin-top: 2rem; margin-left: 0.1rem;">
+   
+      <h1>Personal Settings</h1>
+    </div>
+    <div class="navigationLink">
+      <a href="#" class="selectedLink">My Account</a>
+      <!-- <a href="#" class="notSelected">Notifications</a>
+      <a href="#" class="notSelected">Integrations</a> -->
+    </div>
+    <div class="nameAndPhoto">
+      <h2>Profile</h2>
+      <% if(user.profile_picture){ %>
+        <div class="center">
+        <div class="circleBox" style="overflow: hidden; padding: 0; position: relative; z-index: 2;">
+        <img src="<%=awsLink%><%=user.profile_picture%>" style=" height: 130px; width: 150px; z-index: 1; border-radius: 5px;" alt="hello">
+      </div>
+      </div>
+      <% } else{ %>  
+        <div class="circleBox">
+          <i class="fas fa-camera"></i>
+        </div>
+     <% } %>
+      <form action="/uploadPhoto" method="post" enctype="multipart/form-data" onChange="uploadFile()">
+        <!-- <input  type="file" id="myFile" name="mypic input"> -->
+        <input type="text" id="firstName" name="username" value="<%=user.name %>" hidden/>
+        <div class="btns" style="display: flex; margin-top: 1rem;">
+          <input type="file" class="custom-file-input" name="mypic" id="file"  />
+          &nbsp;
+          <a class="removeBtn" href="/removeProfilePic?_method=DELETE" style="font-size: small; text-decoration: none;"> Remove</a>
+        </div>
+      </form>
+      <form action="/changeUsername" method="POST">
+        <label for="firstName">Name: </label>
+        <input type="text" id="firstName" name="username" class="input" value="<%=user.name %>" />
+        <!-- <label for="lastName">Last name: </label>
+        <input type="text" name="lastName" value="Joshi" /> -->
+        <div class="buttonsForName">
+          <button type="submit" class="saveBtn">Save</button>
+          <!-- <button type="submit" class="cancelBtn">Cancel</button> -->
+        </div>
+      </form>
+    </div>
+    <div class="contactInfoUpdates">
+      <h2>Contact Info</h2>
+      <h3>
+        Access your ATG Workspaces with any email address, or by
+        connecting an account.
+      </h3>
+      <form>
+        <div class="emailForm">
+          <label for="email">Email: </label>
+          <input type="text" name="email" value="<%=user.email%>" readonly style="color:gray" />
+        </div>
+        <!-- <div class="connctedAccount">
+          <label for="connectingAccount">Connected accounts</label>
+          <a href="#">
+            <button class="connectWithGoogle">
+              <img src="img/googleIcon.png" alt="Google icon by Icons8" />
+              Connect with Google
+            </button>
+          </a> -->
+          <!-- <a href="#">
+            <button class="connectWithSlack">
+              <img
+                src="img/slackIcon.png"
+                alt="Slack New icon by Icons8"
+              />
+              Connect with Slack
+            </button>
+          </a> -->
+        <!-- </div> -->
+        <!-- <div class="saveTheVideo">
+          <label for="savingInfo">Saving Info</label>
+          <a href="#">
+            <button class="connectWithGoogle">
+              <img
+                src="img/googledrive.png"
+                alt="Google icon by Icons8"
+              />
+              Save in google drive
+            </button>
+          </a>
+          <a href="#">
+            <button class="connectWithSlack">
+              <img src="img/aws.png" alt="Slack New icon by Icons8" />
+              Save in AWS
+            </button>
+          </a>
+        </div> -->
+        <div class="connctedAccount" >
+          <label for="connectingAccount" hidden>Store In:</label>
+
+          <div>
+            <img
+              style="width: 3.5rem; height: 3rem; margin: 5px"
+              src="img/aws.png"
+              alt="AWS New icon by Icons8"
+              hidden
+            />
+            <label class="switch"  hidden>
+              <input type="checkbox" name=""  hidden/>
+              <span class="slider round"  hidden></span>
+            </label>
+
+            <img
+              src="img/googledrive.png"
+              style="width: 3.5rem; height: 3rem; margin: 7px"
+              alt="Google icon by Icons8" hidden
+            />
+          </div>
+          
+
+        </form>
+        </div>
+        
+    </div>
+      <% if(user.login_type=="login"){ %> 
+    <div class="password">
+      <h2>Password</h2>
+      <h3>
+        Note that if you signed in with a connected account, you are using
+        that account’s login information and we cannot change or reset
+        those passwords here.
+      </h3>
+      <form action="/changePassword" method="POST">
+        <div class="currentPassword">
+          <label for="currentPassword">Current Password</label>
+          <input type="password" name="password" placeholder="password" required/>
+        </div>
+        <div class="confirmationPassword">
+          <div class="newPassword">
+            <label for="newPassword">New Password</label>
+            <input
+            type="password"
+            name="newPassword"
+            placeholder="password"required
+            />
+          </div>
+          <div class="confirmPassword">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+            type="password"
+            name="confirmPassword"
+            placeholder="password"required
+            />
+          </div>
+        </div>
+        <!-- <h2>Reset Password</h2>
+          <h3>
+            If you just forgot your password, don’t worry – we got you!
+          </h3> -->
+          <button type="submit" class="resetBtn">
+            <i class="fas fa-lock"></i>
+            Reset Password
+          </button>
+          <!-- <div class="savingCancelling">
+            <button disabled="disabled">Save</button>
+            <button disabled="disabled">Cancel</button>
+          </div> -->
+        </form>
+      </div>
+      <%}%>
+      <!-- <div class="deleteAccount">
+        <h2>Delete Account</h2>
+        <form>
+        <button type="submit" class="deleteBtn">Delete my account</button>
+      </form>
+    </div> -->
+  </div>
+
+</section>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  async function uploadFile() {
+  console.log("skdfhjidhfi")
+  var mypic = new FormData();
+  var imagefile = document.querySelector('#file');
+  mypic.append("mypic", imagefile.files[0]);
+  console.log(imagefile.files)
+  await axios.post('uploadPhoto', mypic, {
+      headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+})
+  window.location.reload();
+  }
+</script>

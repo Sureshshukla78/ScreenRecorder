@@ -1,0 +1,177 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; */
+  overflow: scroll;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  background: #f8f6f0;
+  height: 4rem;
+}
+
+.loomLogo {
+  width: 14rem;
+  margin: 0.5rem 2rem;
+}
+.btn {
+  margin: 1rem;
+  /* display: flex; */
+  /* justify-content: center; */
+  width: 7rem;
+  height: 2.2rem;
+  text-align: center;
+  border-radius: 19px;
+  border: transparent;
+  background-color: #4b42ad;
+}
+
+.btn a {
+  font-size: 16px;
+  color: #f8f6f0;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.fullContainer {
+  display: flex;
+  position: relative;
+  /* top: -18px; */
+  /* justify-content: space-around; */
+  /* align-items: center; */
+  height: 100vh;
+  /* overflow: hidden; */
+}
+.firstContainer {
+  background-color: #393855;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8rem;
+  color: #f8f6f0;
+  width: 30rem;
+}
+.firstContainer h1 {
+  font-size: 63px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.firstContainer p {
+  padding: 29px 0px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.getBtn {
+  width: 180px;
+  height: 60px;
+  border-radius: 10px;
+  border: none;
+  background-color: hsla(242, 88.4%, 66.3%, 1);
+  color: #f8f6f0;
+  font-size: 17px;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+/* .container {
+  border: 2px solid #cf13c0;
+  box-shadow: 0 2px 4px 3px rgb(0 0 0 / 30%);
+}
+
+.container h1 {
+  text-align: center;
+  color: #cf13c0;
+  text-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+} */
+
+.secondContainer {
+  background-size: cover;
+  /* height: 1050px; */
+}
+
+.secondContainer img {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 990px) {
+  .firstContainer {
+    padding: 16.9rem 6rem;
+  }
+  .firstContainer h1 {
+    font-size: 50px;
+  }
+  .firstContainer p {
+    font-size: 17px;
+  }
+  .getBtn {
+    width: 150px;
+    height: 50px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 692px) {
+  .fullContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+  }
+  .firstContainer {
+    padding: 16.9rem 10rem;
+  }
+  .firstContainer h1 {
+    font-size: 50px;
+  }
+  .firstContainer p {
+    font-size: 15px;
+  }
+  .getBtn {
+    width: 150px;
+    height: 50px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 500px) {
+  .loomLogo{
+    width: 14rem;
+    margin: 0.5rem 0.5rem;
+  }
+  .fullContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-x: hidden;
+  }
+  .firstContainer {
+    padding: 8.6rem 0.8rem;
+    width: 23rem;
+  }
+  .firstContainer h1 {
+    margin-top: -3rem;
+    margin-bottom: 3rem;
+    font-size: 50px;
+  }
+  .firstContainer p {
+    font-size: 20px;
+  }
+  .getBtn {
+    width: 150px;
+    height: 50px;
+    font-size: 15px;
+  }
+}
